@@ -28,21 +28,30 @@ class Grid {
   /////////////////////////////////
   drawActiveNotes(img){
     // draw active notes
-    fill(255);
+    fill(100);
     noStroke();
     for (let i=0;i<this.notePos.length;i++){
       for (let j=0;j<this.notePos[i].length;j++){
         let x = this.notePos[i][j].x;
         let y = this.notePos[i][j].y;
+       
         if (this.noteState[i][j]>0) {
+          let s = this.noteState[i][j];
+          let r1 =map(s,0,1,0,255);
           let alpha = this.noteState[i][j] * 200;
-          let c1 = color(255,0,0,alpha);
-          let c2 = color(0,255,0,alpha);
+          let c1 = color(r1,0,255-r1,alpha);
+          let c2 = color(255,alpha);
           let mix = lerpColor(c1, c2, map(i, 0, this.notePos.length, 0, 1));
           fill(mix);
-          let s = this.noteState[i][j];
+        
           ellipse(x, y, this.noteSize*s, this.noteSize*s);
+          noFill();
+          stroke(mix);
+          strokeWeight(3);
+          ellipse(x+2, y+4,this.noteSize*s-5, this.noteSize*s);
+          ellipse(x+2, y+4,this.noteSize*s*2, this.noteSize*s*2);
         }
+        //console.log(this.noteState[i][j]);
         this.noteState[i][j]-=0.05;
         this.noteState[i][j]=constrain(this.noteState[i][j],0,1);
       }
