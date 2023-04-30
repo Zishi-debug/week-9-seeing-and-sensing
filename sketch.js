@@ -7,7 +7,7 @@ let threshold;
 let grid;
 ///////////////////////////////////////////////////////////
 function setup() {
-    createCanvas(640 * 2, 480);
+    createCanvas(640 , 480);
     pixelDensity(1);
     video = createCapture(VIDEO);
     video.hide();
@@ -64,7 +64,7 @@ function draw() {
         }
     }
     diffImg.updatePixels();
-    image(diffImg, 640, 0);
+    //image(diffImg, 640, 0);
 
     noFill();
     stroke(255);
